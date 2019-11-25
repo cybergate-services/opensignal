@@ -22,8 +22,8 @@ services:
     hostname: messagedb
     restart: always
     volumes:
-      - ./data/postgresql/messagedb.sql:/docker-entrypoint-initdb.d/messagedb.sql
-      - ../data//postgresql/messagedb:/var/lib/postgresql/data/
+      - ./postgresql/messagedb.sql:/docker-entrypoint-initdb.d/messagedb.sql
+      - ./postgresql/messagedb:/var/lib/postgresql/data/
     # ports:
     #   - "5422:5432"
     environment:
@@ -44,8 +44,8 @@ services:
     container_name: signalserver
     restart: always
     volumes:
-       - ./data/signalserver/Signal-Server:/Signal-Server
-       - ./data/signalserver/WebSocket-Resources:/WebSocket-Resources
+       - ./signalserver/Signal-Server:/Signal-Server
+       - ./signalserver/WebSocket-Resources:/WebSocket-Resources
        - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
     ports:
       - "8080:8080"
