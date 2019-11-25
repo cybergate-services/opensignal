@@ -45,8 +45,10 @@ services:
     restart: always
     volumes:
        - ./signalserver/Signal-Server:/Signal-Server
-       - ./signalserver/WebSocket-Resources:/WebSocket-Resources
+       - ./signalserver/WebSocket-Resources:/Signal-Server/websocket-resources/
        - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
+       - ./signalserver/ssl:/ssl
+
     ports:
       - "8080:8080"
       - "8081:8081"
