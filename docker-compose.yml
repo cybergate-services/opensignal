@@ -40,7 +40,7 @@ services:
       - "6379:6379"
 
   signalserver:
-    image: cybergatelabs/signal-server
+    image: cybergatelabs/signal-server:2.55
     container_name: signalserver
     restart: always
     volumes:
