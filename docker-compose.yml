@@ -41,9 +41,9 @@ services:
     container_name: docker_signal-server
     restart: always
     # volumes:
-    #   - ./signalserver/Signal-Server:/Signal-Server
-    #   - ./signalserver/WebSocket-Resources:/WebSocket-Resources
-    #   - ./signalserver/ssl:/ssl
+        - ./signalserver/Signal-Server:/Signal-Server
+        - ./signalserver/WebSocket-Resources:/Signal-Server/websocket-resources/
+        - ./conf/signalserver/Signal.yml:/ssl
     ports:
       - "8080:8080"
       - "8081:8081"
