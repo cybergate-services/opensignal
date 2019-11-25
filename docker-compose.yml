@@ -9,7 +9,7 @@ services:
     volumes:
       - ./data/postgresql/accountdb.sql:/docker-entrypoint-initdb.d/accountdb.sql
       - ./data/postgresql/accountdb:/var/lib/postgresql/data/
-    # ports:
+    #ports:
     #   - "5421:5432"
     environment:
       - POSTGRES_USER=signal
@@ -46,7 +46,7 @@ services:
     volumes:
        - ./data/signalserver/Signal-Server:/Signal-Server
        - ./data/signalserver/WebSocket-Resources:/WebSocket-Resources
-       - ./conf/signalserver/Signal.yml:/Signal-Server/config/Signal.yml
+       - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
     ports:
       - "8080:8080"
       - "8081:8081"
