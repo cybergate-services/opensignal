@@ -7,8 +7,8 @@ services:
     hostname: accountdb
     restart: always
     volumes:
-      - ./data/postgresql/accountdb.sql:/docker-entrypoint-initdb.d/accountdb.sql
-      - ./data/postgresql/accountdb:/var/lib/postgresql/data/
+      - ./postgresql/accountdb.sql:/docker-entrypoint-initdb.d/accountdb.sql
+      - ./postgresql/accountdb:/var/lib/postgresql/data/
     #ports:
     #   - "5421:5432"
     environment:
@@ -58,8 +58,8 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./data/minio/.minio/data:/export
-      - ../data/minio/.minio/config:/root/.minio
+      - ./minio/.minio/data:/export
+      - ./minio/.minio/config:/root/.minio
     environment:
       - "MINIO_ACCESS_KEY=AKIAIG4ILCORMAJCS37A"
       - "MINIO_SECRET_KEY=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"
