@@ -15,19 +15,19 @@ push:
 
 server:
   applicationConnectors:
-    - type: https
+    - type: http
       port: 8080
-      keyStorePath: ./ssl/example.keystore
-      keyStorePassword: example
+      #keyStorePath: ./ssl/example.keystore
+      #keyStorePassword: example
       #keyStoreType : PKCS12
-      validateCerts: false
+      #validateCerts: false
   adminConnectors:
-    - type: https
+    - type: http
       port: 8081
-      keyStorePath: ./ssl/example.keystore
-      keyStorePassword: example
-      #keyStoreType : PKCS12
-      validateCerts: false
+      # keyStorePath: ./ssl/example.keystore
+      # keyStorePassword: example
+      # keyStoreType : PKCS12
+      # validateCerts: false
 
 turn: # TURN server configuration
   secret: 121654fjdfgdyesdfgfhgh # TURN server secret
