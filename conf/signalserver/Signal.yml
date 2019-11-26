@@ -41,7 +41,8 @@ cache: # Redis server configuration for cache cluster
   url: "redis://redis:6379/1"
 
 directory: # Redis server configuration for directory cluster
-  url: "redis://redis:6379/0"
+  redis:
+    url: "redis://redis:6379/0"
 
 messageStore: # Postgresql database configuration for message store
   driverClass: org.postgresql.Driver
