@@ -34,8 +34,8 @@ services:
     container_name: redis
     hostname: redis
     restart: always
-    ports:
-      - "6379:6379"
+    #ports:
+    #  - "6379:6379"
 
   signalserver:
     image: cybergatelabs/signal-server:2.55
@@ -51,8 +51,8 @@ services:
     image: minio/minio
     container_name: mino
     hostname: mino
-    ports:
-      - "9000:9000"
+    #ports:
+    #  - "9000:9000"
     volumes:
       - ./minio/.minio/data:/export
       - ./minio/.minio/config:/root/.minio
@@ -69,7 +69,7 @@ services:
       - minio
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc config host add myminio https://minio:9000 AKIAIG4ILCORMAJCS37A u8cQx07PvHJS8/zvr7q3IFY+w2toIYIJQ7vm1ETH;
+      /usr/bin/mc config host add myminio http://minio:9000 AKIAIG4ILCORMAJCS37A u8cQx07PvHJS8/zvr7q3IFY+w2toIYIJQ7vm1ETH;
       /usr/bin/mc rm -r --force myminio/signal-attachments-buu;
       /usr/bin/mc rm -r --force myminio/signal-profiles-buu;
       /usr/bin/mc mb myminio/signal-attachments-buu;
