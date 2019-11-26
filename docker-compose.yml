@@ -41,6 +41,9 @@ services:
     image: cybergatelabs/signal-server:2.55
     container_name: signalserver
     restart: always
+    command: /bin/bash -c "java -jar  /Signal-Server/service/target/TextSecureServer-2.55.jar messagedb migrate /Signal-Server/service/config/Signal.yml &&
+      java -jar  /Signal-Server/service/target/TextSecureServer-2.55.jar accountdb migrate /Signal-Server/service/config/Signal.yml"
+
     volumes:
        - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
     ports:
