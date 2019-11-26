@@ -38,11 +38,11 @@ turn: # TURN server configuration
     - turn:cybergate.lk:80?transport=udp #fake
 
 cache: # Redis server configuration for cache cluster
-  url: "redis://redis:6379/1"
+  url: http://redis:6379
 
 directory: # Redis server configuration for directory cluster
   redis:
-    url: "redis://redis:6379/0"
+    url: http://redis:6379
 
 messageStore: # Postgresql database configuration for message store
   driverClass: org.postgresql.Driver
