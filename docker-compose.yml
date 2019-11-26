@@ -7,7 +7,6 @@ services:
     hostname: accountdb
     restart: always
     volumes:
-      - ./postgresql/accountdb.sql:/docker-entrypoint-initdb.d/accountdb.sql
       - ./postgresql/accountdb:/var/lib/postgresql/data/
     #ports:
     #   - "5421:5432"
@@ -22,7 +21,6 @@ services:
     hostname: messagedb
     restart: always
     volumes:
-      - ./postgresql/messagedb.sql:/docker-entrypoint-initdb.d/messagedb.sql
       - ./postgresql/messagedb:/var/lib/postgresql/data/
     # ports:
     #   - "5422:5432"
@@ -44,11 +42,7 @@ services:
     container_name: signalserver
     restart: always
     volumes:
-      # - ./signalserver/Signal-Server:/Signal-Server
-      # - ./signalserver/WebSocket-Resources:/Signal-Server/websocket-resources/
        - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
-       - ./signalserver/ssl:/ssl
-
     ports:
       - "8080:8080"
       - "8081:8081"
