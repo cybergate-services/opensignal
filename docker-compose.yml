@@ -1,83 +1,42 @@
-version: '2'
+version: '3'
 services:
-
-  accountdb:
-    image: postgres:11
-    container_name: accountdb
-    hostname: accountdb
-    restart: always
-    volumes:
-      - ./postgresql/accountdb:/var/lib/postgresql/data/
-    #ports:
-    #   - "5421:5432"
-    environment:
-      - POSTGRES_USER=signal
-      - POSTGRES_PASSWORD=thepassword
-      - POSTGRES_DB=accountdb
-
-  messagedb:
-    image: postgres:11
-    container_name: messagedb
-    hostname: messagedb
-    restart: always
-    volumes:
-      - ./postgresql/messagedb:/var/lib/postgresql/data/
-    # ports:
-    #   - "5422:5432"
-    environment:
-      - POSTGRES_USER=signal
-      - POSTGRES_PASSWORD=thepassword
-      - POSTGRES_DB=messagedb
-  
   redis:
-    image: redis:5.0.7-buster
-    container_name: redis
-    hostname: redis
-    restart: always
-    #ports:
-    #  - "6379:6379"
-
-  signalserver:
-    image: cybergatelabs/signal-server:2.55
-    container_name: signalserver
-    restart: always
-    command: /bin/bash -c "java -jar  /Signal-Server/service/target/TextSecureServer-2.55.jar messagedb migrate /Signal-Server/service/config/Signal.yml &&
-      java -jar  /Signal-Server/service/target/TextSecureServer-2.55.jar accountdb migrate /Signal-Server/service/config/Signal.yml"
-
-    volumes:
-       - ./conf/signalserver/Signal.yml:/Signal-Server/service/config/Signal.yml
+    image: redis
     ports:
-      - "8080:8080"
-      - "8081:8081"
-
-  minio:
-    image: minio/minio
-    container_name: mino
-    hostname: mino
-    #ports:
-    #  - "9000:9000"
-    volumes:
-      - ./minio/.minio/data:/export
-      - ./minio/.minio/config:/root/.minio
+      - "6379:6379"
+    restart: always
+  db:
+    image: postgres
+    restart: always
     environment:
-      - "MINIO_ACCESS_KEY=AKIAIG4ILCORMAJCS37A"
-      - "MINIO_SECRET_KEY=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"
-    command: server /export
-
-  bucket:
-    image: minio/mc
-    container_name: bucket
-    hostname: bucket
-    depends_on:
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc config host add myminio http://minio:9000 AKIAIG4ILCORMAJCS37A u8cQx07PvHJS8/zvr7q3IFY+w2toIYIJQ7vm1ETH;
-      /usr/bin/mc rm -r --force myminio/signal-attachments-buu;
-      /usr/bin/mc rm -r --force myminio/signal-profiles-buu;
-      /usr/bin/mc mb myminio/signal-attachments-buu;
-      /usr/bin/mc mb myminio/signal-profiles-buu;
-      /usr/bin/mc policy public myminio/signal-attachments-buu;
-      /usr/bin/mc policy public myminio/signal-profiles-buu;
-      exit 0;
-      "
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: signal
+    expose:
+      - 5432
+    volumes:
+      - "./postgres-data:/var/lib/postgresql/data"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+     - "127.0.0.1:8083:8080"
+  testhelper:
+    image: registry.git.callpipe.com/finn/signald-test-infrastructure/testhelper:master
+    restart: always
+    build:
+      context: .
+      dockerfile: testhelper.Dockerfile
+    environment:
+      DB: "host=db user=signal dbname=signal password=password sslmode=disable"
+    ports:
+      - "127.0.0.1:8082:8082"
+  signal:
+    image: registry.git.callpipe.com/finn/signald-test-infrastructure/signal-server:2.02
+    build:
+      context: .
+      dockerfile: signal-server.Dockerfile
+    volumes:
+      - "./signal-server.yaml:/etc/signal-server.yaml"
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8081:8081"
