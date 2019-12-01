@@ -1,17 +1,17 @@
 twilio: # Twilio gateway configuration
-  accountId: 
-  accountToken: 
+  accountId: CHANGE_ACCID
+  accountToken: CHANGE_TOKEN
   numbers: # Numbers allocated in Twilio
-    - # First number
-    - # Second number
-    - # Third number
-    - # ...
-    - # Nth number
+    # - 1ST_NUMBER
+    # - 2ND_NUMBER
+    # - 3RD_NUMBER
+    # - # ...
+    # - NTH_NUMBER
   messagingServicesId: 
-  localDomain: # Domain Twilio can connect back to for calls. Should be domain of your service.
+  localDomain: cybergate.lk # Domain Twilio can connect back to for calls. Should be domain of your service.
 
 push:
-  queueSize: # Size of push pending queue
+  queueSize: 200 # Size of push pending queue
 
 redphone:
   authKey: # Deprecated
@@ -19,22 +19,23 @@ redphone:
 turn: # TURN server configuration
   secret: # TURN server secret
   uris:
-    - stun:yourdomain:80
-    - stun:yourdomain.com:443
-    - turn:yourdomain:443?transport=udp
-    - turn:etc.com:80?transport=udp
+    - stun:turn.cybergate.lk:3478
+    - stun:turn.cybergate.lk:5349
+    - turn:turn.cybergate.lk:5349?transport=udp
+    - turn:turn.cybergate.lk:3478?transport=udp
 
 cache: # Redis server configuration for cache cluster
-  url:
+  url: "redis://redis:6379/1"
   replicaUrls:
-
+    - "redis://redit:6379/2"
 directory:
   redis: # Redis server configuration for directory cluster
-    url:
+    url: "redis://redit:6379/3"
     replicaUrls:
+      - "redis://redit:6379/4"
   client: # Configuration for interfacing with Contact Discovery Service cluster
-    userAuthenticationTokenSharedSecret: # hex-encoded secret shared with CDS used to generate auth tokens for Signal users
-    userAuthenticationTokenUserIdSecret: # hex-encoded secret shared among Signal-Servers to obscure user phone numbers from CDS
+    userAuthenticationTokenSharedSecret: 30ad5532152d83956c31968ad1775ad5 # hex-encoded secret shared with CDS used to generate auth tokens for Signal users
+    userAuthenticationTokenUserIdSecret: 23eefa20be6240d3fc939251d6014965 # hex-encoded secret shared among Signal-Servers to obscure user phone numbers from CDS
   sqs:
     accessKey:      # AWS SQS accessKey
     accessSecret:   # AWS SQS accessSecret
