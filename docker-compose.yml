@@ -62,6 +62,18 @@ services:
     networks:
       - signal-net 
       
+  minio:
+    image: minio/minio
+    volumes:
+      - ./data/minio:/data
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - signal-net
+      
 volumes:
   postgresql-data:
 
