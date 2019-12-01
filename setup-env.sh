@@ -8,8 +8,8 @@ cat postgresql/postgresql.env > ./.postgresql.env
 cat letsencrypt/letsencrypt.env > ./.letsencrypt.env
 cat minio/minio.env > ./.minio.env
 
-sed -i -e "s/CHANGE_ME/$PASSWORD/g" ./.postgresql.env
-sed -i -e "s/CHANGE_ACCESS_KEY/$ACCESS_KEY/g" ./.minio.env
-sed -i -e "s/CHANGE_SECRET_KEY/$SECRET_KEY/g" ./.minio.env
+sed -i  "s/CHANGE_ME/$PASSWORD/g" ./.postgresql.env
+sed -i  "s/CHANGE_ACCESS_KEY/$ACCESS_KEY/g" ./.minio.env
+sed -i  "s/CHANGE_SECRET_KEY/$SECRET_KEY/g" ./.minio.env
 
 echo "CHANGE_ME=${PASSWORD}" > ./.env
