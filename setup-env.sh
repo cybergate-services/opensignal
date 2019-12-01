@@ -13,5 +13,3 @@ sed -i -e "s/CHANGE_SECRET_KEY/$SECRET_KEY/g" ./.minio.env
 cat letsencrypt/letsencrypt.env > ./.letsencrypt.env
 
 echo "CHANGE_ME=${PASSWORD}" > ./.env
-cat coturn/coturn.env >> ./.env
-cat postgresql/postgresql.env >> ./.env
