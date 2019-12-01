@@ -1,3 +1,4 @@
+#!/bin/bash
 rm -rf ./.env
 PASSWORD=$(openssl rand -base64 16)
 ACCESS_KEY=$(openssl rand -base64 20)
