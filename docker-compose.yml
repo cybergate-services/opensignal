@@ -16,29 +16,40 @@ services:
     env_file: 
       - ./.letsencrypt.env
     networks:
-  
-  
-  
+      - signal-net
+    
   redis:
     image: redis
+    container_name: redis
+    hostname: redis
     ports:
       - "6379:6379"
     restart: always
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: signal
-    expose:
-      - 5432
+    networks:
+      - signal-net
+  
+  postgresql:
+    image: postgresql:11
+    container_name: postgresql
+    hostname: postgresql
+    restart: unless-stopped
     volumes:
-      - "./postgres-data:/var/lib/postgresql/data"
-  adminer:
-    image: adminer
+      - postgresql-data:/var/lib/postgresql/data
+    env_file: 
+      - ./.postgresql.env
+    networks:
+      - signal-net
+ 
+  dbadmin:
+    image: cybergatelabs/dbadmin
+    container_name: dbadmin
+    hostname: dbadmin
     restart: always
-    ports:
-     - "127.0.0.1:8083:8080"
+    #ports:
+    #  - 8080:8080
+    networks:
+      - backend
+ 
   testhelper:
     image: registry.git.callpipe.com/finn/signald-test-infrastructure/testhelper:master
     restart: always
