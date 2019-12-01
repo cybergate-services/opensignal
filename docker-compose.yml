@@ -70,6 +70,7 @@ services:
       - "9000:9000"
     env_file:
       - ./.minio.env
+    command: server /data
     networks:
       - signal-net
       
