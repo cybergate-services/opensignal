@@ -48,28 +48,20 @@ services:
     #ports:
     #  - 8080:8080
     networks:
-      - backend
+      - signal-net
  
-  testhelper:
-    image: registry.git.callpipe.com/finn/signald-test-infrastructure/testhelper:master
-    restart: always
-    build:
-      context: .
-      dockerfile: testhelper.Dockerfile
-    environment:
-      DB: "host=db user=signal dbname=signal password=password sslmode=disable"
-    ports:
-      - "127.0.0.1:8082:8082"
-  signal:
-    image: registry.git.callpipe.com/finn/signald-test-infrastructure/signal-server:2.02
-    build:
-      context: .
-      dockerfile: signal-server.Dockerfile
+  signal-server:
+    image: cybergatelabs/signal-server:2.55
+    container_name: signal-server
+    hostname: signal-server
     volumes:
-      - "./signal-server.yaml:/etc/signal-server.yaml"
+      - "./conf/Signal.yaml:/etc/signal-server.yaml"
     ports:
       - "127.0.0.1:8080:8080"
       - "127.0.0.1:8081:8081"
+    networks:
+      - signal-net 
+      
 volumes:
   postgresql-data:
 
