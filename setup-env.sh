@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 rm -rf ./.env
 PASSWORD=$(LC_ALL=C </dev/urandom tr -dc A-Za-z0-9 | head -c 28)
-ACCESS_KEY=$(LC_ALL=C </dev/urandom tr -dc A-Za-z0-9 | head -c 28)
-SECRET_KEY=$(LC_ALL=C </dev/urandom tr -dc A-Za-z0-9 | head -c 28)
+ACCESS_KEY=$(openssl rand -hex 16)
+SECRET_KEY=$(openssl rand -hex 16)
 
 cat postgresql/postgresql.env > ./.postgresql.env
 cat letsencrypt/letsencrypt.env > ./.letsencrypt.env
