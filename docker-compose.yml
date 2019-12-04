@@ -29,7 +29,7 @@ services:
       - signal-net
   
   messagedb:
-    image: postgresql:11
+    image: postgresql
     container_name: messagedb
     hostname: messagedb
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
       - signal-net
       
   accountdb:
-    image: postgresql:11
+    image: postgresql
     container_name: accountdb
     hostname: accountdb
     restart: unless-stopped
