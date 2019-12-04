@@ -89,6 +89,8 @@ services:
   sqs:
     image: cybergatelabs/sqs:latest
     container_name: sqs
+    volumes:
+     ./conf/sqsconfig_local.json:opt/sqs-insight/config/config_local.json
     ports:
       - "9324:9324"
       - "9325:9325"
