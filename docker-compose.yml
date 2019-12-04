@@ -105,8 +105,8 @@ volumes:
 networks:
   signal-net:
     driver: bridge
-      driver_opts:
-        com.docker.network.bridge.name: br-signal
+    driver_opts:
+      com.docker.network.bridge.name: br-signal
     ipam:
       driver: default
       config:
