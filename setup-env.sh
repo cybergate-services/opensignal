@@ -16,4 +16,7 @@ sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./.messagedb.env
 sed -ie "s/CHANGE_ACCESS_KEY/${ACCESS_KEY}/g" ./.minio.env
 sed -ie "s/CHANGE_SECRET_KEY/${SECRET_KEY}/g" ./.minio.env
 
+sed -ie "s/SQS_ACCESS_KEY/${ACCESS_KEY}/g" ./conf/sqsconfig_local.json
+sed -ie "s/SQS_SECRET_KEY/${SECRET_KEY}/g" ./conf/sqsconfig_local.json
+
 echo "CHANGE_ME=${PASSWORD}" > ./.env
