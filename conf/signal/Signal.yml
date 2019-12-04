@@ -1,7 +1,8 @@
 twilio: # Twilio gateway configuration
-  accountId: CHANGE_ACCID
-  accountToken: CHANGE_TOKEN
+  accountId: dddd #fake
+  accountToken: aaaa #fake
   numbers: # Numbers allocated in Twilio
+    - "+121020222" #fake
     # - 1ST_NUMBER
     # - 2ND_NUMBER
     # - 3RD_NUMBER
@@ -13,11 +14,11 @@ twilio: # Twilio gateway configuration
 push:
   queueSize: 200 # Size of push pending queue
 
-redphone:
-  authKey: # Deprecated
+  #redphone:
+  #authKey: # Deprecated
 
 turn: # TURN server configuration
-  secret: # TURN server secret
+  secret: pVZD0vNdyZ4XLdND7BaiG7kXjY10 # TURN server secret
   uris:
     - stun:turn.cybergate.lk:3478
     - stun:turn.cybergate.lk:5349
@@ -34,56 +35,73 @@ directory:
     replicaUrls:
       - "redis://redis:6379/4"
   client: # Configuration for interfacing with Contact Discovery Service cluster
-    userAuthenticationTokenSharedSecret: 30ad5532152d83956c31968ad1775ad5 # hex-encoded secret shared with CDS used to generate auth tokens for Signal users
-    userAuthenticationTokenUserIdSecret: 23eefa20be6240d3fc939251d6014965 # hex-encoded secret shared among Signal-Servers to obscure user phone numbers from CDS
+    userAuthenticationTokenSharedSecret: 30d5 # hex-encoded secret shared with CDS used to generate auth tokens for Signal users
+    userAuthenticationTokenUserIdSecret: 23eefa # hex-encoded secret shared among Signal-Servers to obscure user phone numbers from CDS
   sqs:
-    accessKey: SQS_ACCESS_KEY      # AWS SQS accessKey
-    accessSecret: SQS_SECRET_KEY   # AWS SQS accessSecret
+    accessKey: bcd2c0740e2a273aaf7036eff7c10acb      # AWS SQS accessKey
+    accessSecret: 0aff3c92d9afb26c81423c8d588e6549   # AWS SQS accessSecret
     queueUrl:  sqs://sqs:9324      # AWS SQS queue url
   server:
     replicationUrl:  http://127.0.0.1      # CDS replication endpoint base url
-    replicationPassword: CHANGE_ME         # CDS replication endpoint password
+    replicationPassword: pVZD0vNdyZ4XLdND7BaiG7kXjY10         # CDS replication endpoint password
     replicationCaCertificate: CA_CERT      # CDS replication endpoint TLS certificate trust root
     #reconciliationChunkSize:       # CDS reconciliation chunk size
     #reconciliationChunkIntervalMs: # CDS reconciliation chunk interval, in milliseconds
 
 messageCache: # Redis server configuration for message store cache
-  url: "redis://redis:6379/5"
-  replicaUrls:
-    - "redis://redis:6379/6"
+  redis:
+    url: "redis://redis:6379/5"
+    replicaUrls:
+      - "redis://redis:6379/6"
 
 messageStore: # Postgresql database configuration for message store
   driverClass: org.postgresql.Driver
   user: signal
-  password: CHANGE_ME
+  password: pVZD0vNdyZ4XLdND7BaiG7kXjY10
   url: "jdbc:postgresql://messagedb:5432/messagedb"
   properties:
     charSet: UTF-8
 
 attachments: # AWS S3 configuration
-  accessKey: SQS_ACCESS_KEY
-  accessSecret: SQS_SECRET_KEY
+  accessKey: bcd2c0740e2a273aaf7036eff7c10acb
+  accessSecret: 0aff3c92d9afb26c81423c8d588e6549
   bucket: signal-attachments
+  region: us-east-1
 
 profiles: # AWS S3 configuration
-  accessKey: MINO_ACCESS_KEY
-  accessSecret: MINO_SECRET_KEY
+  accessKey: bcd2c0740e2a273aaf7036eff7c10acb
+  accessSecret: 0aff3c92d9afb26c81423c8d588e6549
   bucket: signal-profiles
   region: us-east-1
 
 database: # Postgresql database configuration
   driverClass: org.postgresql.Driver
   user: signal
-  password: CHANGE_ME
+  password: pVZD0vNdyZ4XLdND7BaiG7kXjY10
   url: "jdbc:postgresql://accountdb:5432/accountdb"
   properties:
     charSet: UTF-8
 
 apn: # Apple Push Notifications configuration
-  bundleId: 1312312 #fake
-  pushCertificate: 13123121312312 #fake
-  pushKey: 1312312 #fake
+  bundleId: 1312312
+  pushCertificate: 31231
+  pushKey: 12321321
 
 gcm: # GCM Configuration
-  senderId: 81191cd603d20cad72bfae81e53a58bc #fake
-  apiKey: 81191cd603d20cad72bfae81e53a58bc #fake 
+  senderId: 412918270132 #fake
+  apiKey: AIzaSyC8gPzceq2SPebZZWaD3I9OeqePyD9CUqk #fake
+
+accountDatabaseCrawler:
+  chunkSize: 100
+  chunkIntervalMs: 8000
+
+recaptcha:
+  secret: 666666
+
+pushScheduler:
+  url: "redis://redis:6379/7"
+  replicaUrls: 
+    - "redis://redis:6379/8"
+
+
+
