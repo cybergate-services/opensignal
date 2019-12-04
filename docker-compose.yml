@@ -28,15 +28,27 @@ services:
     networks:
       - signal-net
   
-  postgresql:
+  messagedb:
     image: postgresql:11
-    container_name: postgresql
-    hostname: postgresql
+    container_name: messagedb
+    hostname: messagedb
     restart: unless-stopped
     volumes:
-      - postgresql-data:/var/lib/postgresql/data
+      - messagedb-data:/var/lib/postgresql/data
     env_file: 
-      - ./.postgresql.env
+      - ./.messagedb.env
+    networks:
+      - signal-net
+      
+  accountdb:
+    image: postgresql:11
+    container_name: accountdb
+    hostname: accountdb
+    restart: unless-stopped
+    volumes:
+      - accountdb-data:/var/lib/postgresql/data
+    env_file: 
+      - ./.messagedb.env
     networks:
       - signal-net
  
