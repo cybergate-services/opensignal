@@ -73,6 +73,15 @@ services:
     command: server /data
     networks:
       - signal-net
+  
+  sqs:
+    image: cybergatelabs/sqs:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+      - "9325:9325"
+    stdin_open: true
+    tty: true
       
 volumes:
   postgresql-data:
