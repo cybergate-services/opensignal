@@ -27,58 +27,63 @@ turn: # TURN server configuration
 cache: # Redis server configuration for cache cluster
   url: "redis://redis:6379/1"
   replicaUrls:
-    - "redis://redit:6379/2"
+    - "redis://redis:6379/2"
 directory:
   redis: # Redis server configuration for directory cluster
-    url: "redis://redit:6379/3"
+    url: "redis://redis:6379/3"
     replicaUrls:
-      - "redis://redit:6379/4"
+      - "redis://redis:6379/4"
   client: # Configuration for interfacing with Contact Discovery Service cluster
     userAuthenticationTokenSharedSecret: 30ad5532152d83956c31968ad1775ad5 # hex-encoded secret shared with CDS used to generate auth tokens for Signal users
     userAuthenticationTokenUserIdSecret: 23eefa20be6240d3fc939251d6014965 # hex-encoded secret shared among Signal-Servers to obscure user phone numbers from CDS
   sqs:
-    accessKey:      # AWS SQS accessKey
-    accessSecret:   # AWS SQS accessSecret
-    queueUrl:       # AWS SQS queue url
+    accessKey: SQS_ACCESS_KEY      # AWS SQS accessKey
+    accessSecret: SQS_SECRET_KEY   # AWS SQS accessSecret
+    queueUrl:  sqs://sqs:9324      # AWS SQS queue url
   server:
-    replicationUrl:                # CDS replication endpoint base url
-    replicationPassword:           # CDS replication endpoint password
-    replicationCaCertificate:      # CDS replication endpoint TLS certificate trust root
-    reconciliationChunkSize:       # CDS reconciliation chunk size
-    reconciliationChunkIntervalMs: # CDS reconciliation chunk interval, in milliseconds
+    replicationUrl:  http://127.0.0.1      # CDS replication endpoint base url
+    replicationPassword: CHANGE_ME         # CDS replication endpoint password
+    replicationCaCertificate: CA_CERT      # CDS replication endpoint TLS certificate trust root
+    #reconciliationChunkSize:       # CDS reconciliation chunk size
+    #reconciliationChunkIntervalMs: # CDS reconciliation chunk interval, in milliseconds
 
 messageCache: # Redis server configuration for message store cache
-  url:
+  url: "redis://redis:6379/5"
   replicaUrls:
+    - "redis://redis:6379/6"
 
 messageStore: # Postgresql database configuration for message store
   driverClass: org.postgresql.Driver
-  user:
-  password:
-  url:
+  user: signal
+  password: CHANGE_ME
+  url: "jdbc:postgresql://messagedb:5432/messagedb"
+  properties:
+    charSet: UTF-8
 
 attachments: # AWS S3 configuration
-  accessKey:
-  accessSecret:
-  bucket:
+  accessKey: SQS_ACCESS_KEY
+  accessSecret: SQS_SECRET_KEY
+  bucket: signal-attachments
 
 profiles: # AWS S3 configuration
-  accessKey:
-  accessSecret:
-  bucket:
-  region:
+  accessKey: MINO_ACCESS_KEY
+  accessSecret: MINO_SECRET_KEY
+  bucket: signal-profiles
+  region: us-east-1
 
 database: # Postgresql database configuration
   driverClass: org.postgresql.Driver
-  user:
-  password:
-  url:
+  user: signal
+  password: CHANGE_ME
+  url: "jdbc:postgresql://accountdb:5432/accountdb"
+  properties:
+    charSet: UTF-8
 
 apn: # Apple Push Notifications configuration
-  bundleId:
-  pushCertificate:
-  pushKey:
+  bundleId: 1312312 #fake
+  pushCertificate: 13123121312312 #fake
+  pushKey: 1312312 #fake
 
 gcm: # GCM Configuration
-  senderId:
-  apiKey:
+  senderId: 81191cd603d20cad72bfae81e53a58bc #fake
+  apiKey: 81191cd603d20cad72bfae81e53a58bc #fake 
