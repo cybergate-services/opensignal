@@ -100,8 +100,9 @@ services:
       - signal-net
       
 volumes:
-  postgresql-data:
-
+  accountdb-data:
+  messagedb-data:
+  
 networks:
   signal-net:
     driver: bridge
