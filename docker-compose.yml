@@ -96,6 +96,8 @@ services:
       - "9325:9325"
     stdin_open: true
     tty: true
+    networks:
+      - signal-net
       
 volumes:
   postgresql-data:
