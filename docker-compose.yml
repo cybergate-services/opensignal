@@ -67,7 +67,7 @@ services:
     container_name: signal-server
     hostname: signal-server
     volumes:
-      - ".conf/signal/Signal.yml:/etc/Signal.yml"
+      - ./conf/signal/Signal.yml:/etc/Signal.yml
     ports:
       - "127.0.0.1:8080:8080"
       - "127.0.0.1:8081:8081"
@@ -90,7 +90,7 @@ services:
     image: cybergatelabs/sqs:latest
     container_name: sqs
     volumes:
-      - ./conf/sqsconfig_local.json:/opt/sqs-insight/config/config_local.json
+      - ./conf/sqs/config_local.json:/opt/sqs-insight/config/config_local.json
     ports:
       - "9324:9324"
       - "9325:9325"
