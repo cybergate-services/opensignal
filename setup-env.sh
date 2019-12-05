@@ -12,7 +12,7 @@ cat postgresql/postgres.env > ./.postgres.env
 cat letsencrypt/letsencrypt.env > ./.letsencrypt.env
 cat minio/minio.env > ./.minio.env
 
-sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./.posgresql.env
+sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./.postgres.env
 #sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./.accountdb.env
 #sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./.messagedb.env
 
