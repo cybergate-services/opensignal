@@ -7,7 +7,7 @@ SECRET_KEY=$(openssl rand -hex 16)
 
 #cat postgresql/accountdb.env > ./.accountdb.env
 #cat postgresql/messagedb.env > ./.messagedb.env
-cat postgresql/posgresql.env > ./.posgresql.env
+cat postgresql/postgres.env > ./.postgres.env
 
 cat letsencrypt/letsencrypt.env > ./.letsencrypt.env
 cat minio/minio.env > ./.minio.env
