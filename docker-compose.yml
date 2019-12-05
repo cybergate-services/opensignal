@@ -90,6 +90,7 @@ services:
 volumes:
   accountdb-data:
   messagedb-data:
+  signaldb-data:
   
 networks:
   signal-net:
