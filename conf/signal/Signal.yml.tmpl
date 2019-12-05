@@ -62,6 +62,14 @@ messageStore: # Postgresql database configuration for message store
   properties:
     charSet: UTF-8
 
+abuseDatabase: # Postgresql database configuration for message store
+  driverClass: org.postgresql.Driver
+  user: signal
+  password: CHANGE_ME
+  url: "jdbc:postgresql://signaldb:5432/abusedb"
+  properties:
+    charSet: UTF-8
+    
 attachments: # AWS S3 configuration
   accessKey: MINIO_ACCESS_KEY
   accessSecret: MINIO_SECRET_KEY
