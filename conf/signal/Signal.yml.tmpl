@@ -57,28 +57,28 @@ messageCache: # Redis server configuration for message store cache
 messageStore: # Postgresql database configuration for message store
   driverClass: org.postgresql.Driver
   user: signal
-  password: pVZD0vNdyZ4XLdND7BaiG7kXjY10
-  url: "jdbc:postgresql://messagedb:5432/messagedb"
+  password: CHNAGE_ME
+  url: "jdbc:postgresql://signaldb:5432/messagedb"
   properties:
     charSet: UTF-8
 
 attachments: # AWS S3 configuration
-  accessKey: bcd2c0740e2a273aaf7036eff7c10acb
-  accessSecret: 0aff3c92d9afb26c81423c8d588e6549
+  accessKey: MINIO_ACCESS_KEY
+  accessSecret: MINIO_SECRET_KEY
   bucket: signal-attachments
   region: us-east-1
 
 profiles: # AWS S3 configuration
-  accessKey: bcd2c0740e2a273aaf7036eff7c10acb
-  accessSecret: 0aff3c92d9afb26c81423c8d588e6549
+  accessKey: MINIO_ACCESS_KEY
+  accessSecret: MINIO_SECRET_KEY
   bucket: signal-profiles
   region: us-east-1
 
 database: # Postgresql database configuration
   driverClass: org.postgresql.Driver
   user: signal
-  password: pVZD0vNdyZ4XLdND7BaiG7kXjY10
-  url: "jdbc:postgresql://accountdb:5432/accountdb"
+  password: CHANGE_ME
+  url: "jdbc:postgresql://signaldb:5432/accountdb"
   properties:
     charSet: UTF-8
 
