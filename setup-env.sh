@@ -25,8 +25,8 @@ cat ./conf/signal/Signal.yml.tmpl > ./conf/signal/Signal.yml
 sed -ie "s/SQS_ACCESS_KEY/${ACCESS_KEY}/g" ./conf/signal/Signal.yml
 sed -ie "s/SQS_SECRET_KEY/${SECRET_KEY}/g" ./conf/signal/Signal.yml
 
-sed -ie "s/MINO_ACCESS_KEY/${ACCESS_KEY}/g" ./conf/signal/Signal.yml
-sed -ie "s/MINO_SECRET_KEY/${SECRET_KEY}/g" ./conf/signal/Signal.yml
+sed -ie "s/MINIO_ACCESS_KEY/${ACCESS_KEY}/g" ./conf/signal/Signal.yml
+sed -ie "s/MINIO_SECRET_KEY/${SECRET_KEY}/g" ./conf/signal/Signal.yml
 
 sed -ie "s/CHANGE_ME/${PASSWORD}/g" ./conf/signal/Signal.yml
 
