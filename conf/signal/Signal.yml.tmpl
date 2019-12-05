@@ -111,9 +111,11 @@ pushScheduler:
   replicaUrls: 
     - "redis://redis:6379/8"
 
-unidentifiedDelivery: {
-    "bookCategory" : "Java"
-   } 
+unidentifiedDelivery: 
+  privateKey: 8888
+  expiresDays: 568
+  certificate: XYsrt
+ 
 voiceVerification: {
     "bookCategory" : "Java"
    } 
