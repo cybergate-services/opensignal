@@ -1,0 +1,102 @@
+version: '3'
+services:
+
+  letsencrypt:
+    image: cybergatelabs/letsencrypt
+    restart: unless-stopped
+    container_name: letsencrypt
+    hostname: letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./data/letsencrypt/config:/config
+    env_file: 
+      - ./.letsencrypt.env
+    networks:
+      - signal-net
+    
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - signal-net
+  
+  signaldb:
+    image: cybergatelabs/postgres-multi-db
+    container_name: signaldb
+    hostname: signaldb
+    restart: unless-stopped
+    volumes:
+      - signaldb-data:/var/lib/postgresql/data
+    env_file: 
+      - ./.postgress.env
+    networks:
+      - signal-net
+  
+  dbadmin:
+    image: cybergatelabs/dbadmin
+    container_name: dbadmin
+    hostname: dbadmin
+    restart: always
+    #ports:
+    #  - 8080:8080
+    networks:
+      - signal-net
+ 
+  signal-server:
+    image: cybergatelabs/signal-server:2.55
+    container_name: signal-server
+    hostname: signal-server
+    volumes:
+      - ./conf/signal/Signal.yml:/etc/Signal.yml
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8081:8081"
+    networks:
+      - signal-net 
+      
+  minio:
+    image: minio/minio
+    volumes:
+      - ./data/minio:/data
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./.minio.env
+    command: server /data
+    networks:
+      - signal-net
+  
+  sqs:
+    image: cybergatelabs/sqs:latest
+    container_name: sqs
+    volumes:
+      - ./conf/sqs/config_local.json:/opt/sqs-insight/config/config_local.json
+    ports:
+      - "9324:9324"
+      - "9325:9325"
+    stdin_open: true
+    tty: true
+    networks:
+      - signal-net
+      
+volumes:
+  accountdb-data:
+  messagedb-data:
+  
+networks:
+  signal-net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-signal
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.240.0/24
