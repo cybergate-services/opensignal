@@ -45,8 +45,8 @@ services:
     container_name: dbadmin
     hostname: dbadmin
     restart: always
-    #ports:
-    #  - 8080:8080
+    ports:
+      - 8080:8080
     networks:
       - signal-net
  
@@ -66,6 +66,8 @@ services:
       
   minio:
     image: minio/minio
+    container_name: mino
+    hostname: minio
     volumes:
       - ./data/minio:/data
     ports:
