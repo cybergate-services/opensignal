@@ -46,7 +46,7 @@ services:
     hostname: dbadmin
     restart: always
     ports:
-      - 8080:8080
+      - 9090:8080
     networks:
       - signal-net
  
